@@ -1,0 +1,10 @@
+.content {
+  display: flex;
+  background: #0c0e16;
+}
+
+.main-content {
+  width: calc(100vw - 65px);
+  height: 100vh;
+  overflow: scroll;
+}

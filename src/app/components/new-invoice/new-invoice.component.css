@@ -1,0 +1,157 @@
+/* drawer.component.css */
+.drawer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.sidebar {
+  border-top-right-radius: 12px;
+  height: 100vh;
+  width: 540px; /* Adjust the sidebar width as needed */
+  background-color: #141625;
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling for the sidebar */
+}
+
+.content {
+  flex: 1; /* Allow content area to grow and fill available space */
+  padding: 20px;
+  overflow-y: auto; /* Enable vertical scrolling for the content */
+}
+
+.footer {
+  background-color: #141625;
+  color: white;
+  text-align: center;
+  border-bottom-right-radius: 12px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.save-action {
+  display: flex;
+}
+
+.actions,
+h3 {
+  margin: 0;
+  margin-left: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 12px 16px;
+  border-radius: 24px;
+  color: #fff;
+}
+
+.discard {
+  background: #fff;
+  color: #252945;
+}
+
+.save {
+  background: #7c5dfa;
+}
+
+.save-draft {
+  background: #1e2139;
+}
+
+/* invoice-form.component.css */
+.invoice-form {
+  width: 480px;
+  padding: 10px 20px;
+}
+
+.invoice-form h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.bill-from {
+  margin-top: 20px;
+}
+
+.small-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.address {
+  display: flex;
+}
+
+.address > .form-input > input {
+  width: 138px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-input {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.form-input > input {
+  border-radius: 4px;
+  font-size: 16px;
+  background: #252945;
+  border: 1px solid #252945;
+  padding: 8px 10px;
+  margin: 10px 0 0;
+}
+
+.form-input:last-child {
+  margin-right: 0;
+}
+
+.form-group > input,
+select {
+  border-radius: 4px;
+  font-size: 16px;
+  background: #252945;
+  border: 1px solid #252945;
+  padding: 8px 10px;
+  margin: 10px 0 0;
+  width: 100%;
+}
+
+input[type="date"]::-webkit-datetime-edit {
+  color: #fff; /* Change to your desired color */
+}
+
+#datepicker::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts the color (e.g., black to white) */
+  color: #fff; /* Change the color to red */
+}
+
+.select-date {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-input > input[type="date"] {
+  width: 235px;
+}
+
+.payment-terms {
+  width: 235px;
+}
+
+#dropdown {
+  color: #fff; /* Replace 'red' with your desired text color */
+}

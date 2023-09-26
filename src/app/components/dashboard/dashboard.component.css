@@ -1,0 +1,135 @@
+.dashboard {
+  padding: 56px 280px;
+}
+
+.invoice-list {
+  margin-top: 48px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.invoices-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoices-header-title {
+  line-height: 36px;
+  letter-spacing: -1px;
+  margin: 0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.invoices-header-sub-title {
+  font-weight: bold;
+  font-size: 12px;
+  list-style: 15px;
+  letter-spacing: -0.25px;
+  color: #dfe3fa;
+}
+
+.right-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-new-btn {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  background: #7c5dfa;
+  padding: 6px;
+  border-radius: 24px;
+}
+
+.create-new-btn > h3 {
+  color: #fff;
+  margin: 0;
+  margin-left: 12px;
+  font-weight: bold;
+  font-size: 12px;
+  list-style: 15px;
+  letter-spacing: -0.25px;
+}
+
+.plus {
+  padding: 4px 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.invoice-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  background-color: #1e2139;
+  padding: 24px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.invoice-box > h3 {
+  color: #fff;
+  margin: 0;
+  width: 100px;
+  font-size: 12px;
+}
+
+.invoice-id {
+  font-weight: bold;
+}
+
+.invoice-id-hash {
+  color: #7e88c3;
+}
+
+.invoice-due {
+  font-size: 10px !important;
+  color: #888eb0 !important;
+}
+
+.invoice-client-name {
+  font-size: 10px !important;
+  color: #f8f8fb !important;
+}
+
+.invoice-total {
+  font-weight: 20px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.invoice-status-paid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.red-background {
+  background-color: rgba(255, 0, 0, 0.1); /* Red color with 50% opacity */
+}
+
+.green-background {
+  background-color: rgba(0, 255, 0, 0.1); /* Green color with 70% opacity */
+}
+
+.white-background {
+  background-color: rgba(255, 255, 255, 0.1); /* White color with 30% opacity */
+}

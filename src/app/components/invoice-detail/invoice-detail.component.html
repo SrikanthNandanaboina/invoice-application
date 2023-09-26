@@ -1,0 +1,154 @@
+<!-- invoice-details.component.html -->
+<div class="invoice-details">
+  <div class="go-back" (click)="goBack()">
+    <img src="../.././../assets/icon-arrow-left.svg" alt="Logo" />
+    <app-typography variant="body2" text="Go Back" />
+  </div>
+  <div class="invoice-actions">
+    <div class="invoice-status">
+      <h3 class="invoice-status-title">Status</h3>
+      <h3
+        [ngClass]="getClassObject(invoice.status)"
+        class="invoice-status-paid"
+      >
+        <div
+          class="dot"
+          [style.background-color]="changeDotColor(invoice.status)"
+        ></div>
+        <span [style.color]="changeDotColor(invoice.status)">{{
+          invoice.status
+        }}</span>
+      </h3>
+    </div>
+    <div class="actions">
+      <h3
+        *ngFor="let item of actions"
+        [style.background-color]="item.background"
+        (click)="(item.action)"
+      >
+        {{ item.name }}
+      </h3>
+    </div>
+  </div>
+  <div class="invoice-info">
+    <div class="sender-wrapper">
+      <div class="sender-left">
+        <div>
+          <app-typography variant="h3" text="#" color="#888eb0" />
+          <app-typography variant="h3" text="{{ invoice.id }}" />
+        </div>
+        <app-typography
+          color="#888eb0"
+          variant="body2"
+          text="{{ invoice.description }}"
+        />
+      </div>
+      <div class="sender-right">
+        <app-typography
+          variant="body1"
+          color="#888eb0"
+          text="{{ invoice.senderAddress.street }}"
+        />
+        <app-typography
+          variant="body1"
+          color="#888eb0"
+          text="{{ invoice.senderAddress.city }}"
+        />
+        <app-typography
+          variant="body1"
+          color="#888eb0"
+          text="{{ invoice.senderAddress.postCode }}"
+        />
+        <app-typography
+          variant="body1"
+          color="#888eb0"
+          text="{{ invoice.senderAddress.country }}"
+        />
+      </div>
+    </div>
+    <div class="billing-wrapper">
+      <div class="billing-dates">
+        <div class="billing-date">
+          <div class="title-wrapper">
+            <app-typography
+              variant="body2"
+              color="#888eb0"
+              text="Invoice Date"
+            />
+          </div>
+          <app-typography
+            variant="h3"
+            text="{{ invoice.paymentDue | date : 'dd MMM YYYY' }}"
+          />
+        </div>
+        <div class="payment-date">
+          <div class="title-wrapper">
+            <app-typography
+              variant="body2"
+              color="#888eb0"
+              text="Payment Due"
+            />
+          </div>
+          <app-typography
+            variant="h3"
+            text="{{ invoice.paymentDue | date : 'dd MMM YYYY' }}"
+          />
+        </div>
+      </div>
+      <div class="billing-client">
+        <div class="title-wrapper">
+          <app-typography variant="body2" color="#888eb0" text="Bill To" />
+        </div>
+        <app-typography variant="h3" text="{{ invoice.clientName }}" />
+        <app-typography
+          variant="body2"
+          color="#888eb0"
+          text="{{ invoice.clientAddress.street }}"
+        />
+        <app-typography
+          variant="body2"
+          color="#888eb0"
+          text="{{ invoice.clientAddress.city }}"
+        />
+        <app-typography
+          variant="body2"
+          color="#888eb0"
+          text="{{ invoice.clientAddress.postCode }}"
+        />
+        <app-typography
+          variant="body2"
+          color="#888eb0"
+          text="{{ invoice.clientAddress.country }}"
+        />
+      </div>
+      <div class="billing-email">
+        <div class="title-wrapper">
+          <app-typography color="#888eb0" variant="body2" text="Sent To" />
+        </div>
+        <app-typography variant="h3" text="{{ invoice.clientEmail }}" />
+      </div>
+    </div>
+    <div class="billing-items-wrapper">
+      <div class="billing-items">
+        <div class="billing-items-header">
+          <app-typography variant="body2" text="Item Name" color="#888eb0" />
+          <app-typography variant="body2" text="QTY." color="#888eb0" />
+          <app-typography variant="body2" text="Price" color="#888eb0" />
+          <app-typography variant="body2" text="Total" color="#888eb0" />
+        </div>
+        <div class="billing-item">
+          <div class="item-bought" *ngFor="let item of invoice.items">
+            <app-typography variant="body2" text="{{ item.name }}" />
+            <app-typography variant="body2" text="{{ item.quantity }}" />
+            <app-typography variant="body2" text="&#163;{{ item.price }}" />
+            <app-typography variant="body2" text="&#163;{{ item.total }}" />
+          </div>
+        </div>
+      </div>
+      <div class="billing-total">
+        <app-typography variant="body2" text="Amount Due" />
+        <app-typography variant="h2" text="&#163;{{ invoice.total }}" />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<!-- dashboard.component.html -->
+<div class="dashboard">
+  <div class="header">
+    <div class="invoices-header">
+      <h1 class="invoices-header-title">Invoices</h1>
+      <h3 class="invoices-header-sub-title">
+        There are {{ invoices.length }} total invoices.
+      </h3>
+    </div>
+    <div class="right-header">
+      <!-- <div>filter</div> -->
+      <div class="create-new-btn" (click)="toggleInvoiceVisibility()">
+        <div class="plus">
+          <img src="../.././../assets/icon-plus.svg" alt="Logo" />
+        </div>
+        <h3>New invoice</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="invoice-list">
+    <div *ngFor="let invoice of invoices" class="invoice-item">
+      <div class="invoice-box" (click)="openInvoiceDetail(invoice.id)">
+        <h3 class="invoice-id">
+          <span class="invoice-id-hash">#</span>{{ invoice.id }}
+        </h3>
+        <h3 class="invoice-due">
+          Due {{ invoice.paymentDue | date : "dd MMM YYYY" }}
+        </h3>
+        <h3 class="invoice-client-name">{{ invoice.clientName }}</h3>
+        <h3 class="invoice-total">&#163;{{ getFixedValue(invoice.total) }}</h3>
+        <h3
+          [ngClass]="getClassObject(invoice.status)"
+          class="invoice-status-paid"
+        >
+          <div
+            class="dot"
+            [style.background-color]="changeDotColor(invoice.status)"
+          ></div>
+          <span [style.color]="changeDotColor(invoice.status)">{{
+            invoice.status
+          }}</span>
+        </h3>
+        <img src="../.././../assets/icon-arrow-right.svg" alt="Logo" />
+      </div>
+    </div>
+  </div>
+</div>

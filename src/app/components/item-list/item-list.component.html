@@ -1,0 +1,22 @@
+<div class="items-header">
+  <app-typography variant="body2" text="Name" />
+  <app-typography variant="body2" text="QTY." />
+  <app-typography variant="body2" text="Price" />
+  <app-typography variant="body2" text="Total" />
+  <span></span>
+</div>
+<div class="items" *ngFor="let item of itemList; let i = index">
+  <input [(ngModel)]="item.name" />
+  <input [(ngModel)]="item.quantity" (input)="calculateTotal(item)" />
+  <input [(ngModel)]="item.price" (input)="calculateTotal(item)" />
+  <app-typography variant="body2" text="{{ item.total }}" />
+  <div class="delete-icon" (click)="deleteItem(i)">
+    <img src="../.././../assets/icon-delete.svg" alt="Logo" />
+  </div>
+</div>
+<div class="add-new-item" (click)="addItem()">
+  <img src="../.././../assets/icon-plus.svg" alt="Logo" /><app-typography
+    variant="body2"
+    text="Add New Item"
+  />
+</div>

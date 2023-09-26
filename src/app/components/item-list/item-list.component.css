@@ -1,0 +1,41 @@
+.items-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.items > input {
+  width: 114px;
+  margin-right: 15px;
+  border-radius: 4px;
+  font-size: 16px;
+  background: #252945;
+  border: 1px solid #252945;
+  padding: 8px 10px;
+  color: #fff;
+}
+
+.add-new-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  background: #252945;
+  border: 1px solid #252945;
+  border-radius: 12px;
+  width: 100%;
+  padding: 10px 0;
+
+  > img {
+    margin-right: 8px;
+  }
+}
+
+.delete-icon {
+  margin-left: 16px;
+}
