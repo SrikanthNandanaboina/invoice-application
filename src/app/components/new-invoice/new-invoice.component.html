@@ -2,7 +2,19 @@
   <div class="sidebar">
     <!-- invoice-form.component.html -->
     <div class="invoice-form">
-      <app-typography variant="h2" text="New Invoice" color="#fff" />
+      <app-typography
+        *ngIf="!invoiceId"
+        variant="h2"
+        text="New Invoice"
+        color="#fff"
+      />
+
+      <app-typography
+        *ngIf="invoiceId"
+        variant="h2"
+        text="Edit #{{ invoiceId }}"
+        color="#fff"
+      />
 
       <div class="bill-from">
         <app-typography variant="body2" text="Bill from" color="#7c5dfa" />
@@ -11,12 +23,8 @@
           <div>
             <app-typography variant="body2" text="Street Address" />
           </div>
-          <!-- <label for="streetAddress"></label> -->
-          <input
-            type="text"
-            id="streetAddress"
-            [(ngModel)]="billFrom.streetAddress"
-          />
+          <!-- <label for="street"></label> -->
+          <input type="text" id="street" [(ngModel)]="billFrom.street" />
         </div>
 
         <!-- City, Post Code, and Country Inputs -->
@@ -48,14 +56,14 @@
           <div>
             <app-typography variant="body2" text="Client Name" />
           </div>
-          <!-- <label for="streetAddress"></label> -->
+          <!-- <label for="street"></label> -->
           <input type="text" id="clientName" [(ngModel)]="billTo.clientName" />
         </div>
         <div class="form-group">
           <div>
             <app-typography variant="body2" text="Client Email" />
           </div>
-          <!-- <label for="streetAddress"></label> -->
+          <!-- <label for="street"></label> -->
           <input
             type="text"
             id="clientEmail"
@@ -66,12 +74,8 @@
           <div>
             <app-typography variant="body2" text="Street Address" />
           </div>
-          <!-- <label for="streetAddress"></label> -->
-          <input
-            type="text"
-            id="streetAddress"
-            [(ngModel)]="billTo.streetAddress"
-          />
+          <!-- <label for="street"></label> -->
+          <input type="text" id="street" [(ngModel)]="billTo.street" />
         </div>
 
         <!-- City, Post Code, and Country Inputs -->
@@ -112,10 +116,14 @@
             <app-typography variant="body2" text="Payment terms" />
           </div>
           <select id="dropdown" (change)="onOptionSelected($event)">
-            <option value="1">Next 1 Day</option>
-            <option value="7">Next 7 Days</option>
-            <option value="14">Next 14 Days</option>
-            <option value="30">Next 30 Days</option>
+            <option value="1" selected="1 == paymentTerms">Next 1 Day</option>
+            <option value="7" selected="7 == paymentTerms">Next 7 Days</option>
+            <option value="14" selected="14 == paymentTerms">
+              Next 14 Days
+            </option>
+            <option value="30" selected="30 == paymentTerms">
+              Next 30 Days
+            </option>
           </select>
         </div>
       </div>
@@ -123,7 +131,7 @@
         <div>
           <app-typography variant="body2" text="Project Description" />
         </div>
-        <!-- <label for="streetAddress"></label> -->
+        <!-- <label for="street"></label> -->
         <input type="text" id="description" [(ngModel)]="description" />
       </div>
       <div>
@@ -134,9 +142,16 @@
   <div class="footer">
     <!-- Fixed footer content goes here -->
     <div class="actions">
-      <h3 class="discard" (click)="discard()">Discard</h3>
-      <div class="save-action">
-        <h3 class="save-draft" (click)="save('draft')">Save as Draft</h3>
+      <h3 *ngIf="!invoiceId" class="discard" (click)="discard()">Discard</h3>
+      <h3 *ngIf="invoiceId"></h3>
+      <div class="save-action" *ngIf="invoiceId">
+        <h3 *ngIf="invoiceId" class="save-draft" (click)="discard()">Cancel</h3>
+        <h3 class="save" (click)="update()">Save Changes</h3>
+      </div>
+      <div class="save-action" *ngIf="!invoiceId">
+        <h3 *ngIf="!invoiceId" class="save-draft" (click)="save('draft')">
+          Save as Draft
+        </h3>
         <h3 class="save" (click)="save('pending')">Save & Send</h3>
       </div>
     </div>

@@ -157,6 +157,7 @@ input[type="date"]::-webkit-datetime-edit {
   color: #fff; /* Replace 'red' with your desired text color */
 }
 
+.save,
 .save-draft {
   cursor: pointer;
 }

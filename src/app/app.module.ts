@@ -10,6 +10,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { TypographyComponent } from './typography/typography.component';
 import { ItemListComponent } from './components/item-list/item-list.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { ItemListComponent } from './components/item-list/item-list.component';
     TypographyComponent,
     ItemListComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

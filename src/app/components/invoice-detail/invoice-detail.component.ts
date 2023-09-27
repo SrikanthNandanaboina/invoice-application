@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Invoice } from 'src/app/models/invoice.model';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { SidebarService } from 'src/app/services/sidebar.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -9,6 +11,14 @@ import { DashboardService } from 'src/app/services/dashboard.service';
   styleUrls: ['./invoice-detail.component.css'],
 })
 export class InvoiceDetailComponent implements OnInit {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dashboardService: DashboardService,
+    private sidebarService: SidebarService,
+    private invoiceService: InvoiceService
+  ) {}
+
   invoices: any[] = []; // Replace 'any[]' with the actual invoice data type
   invoice: any = {}; // Initialize with an empty object
   actions = [
@@ -16,14 +26,17 @@ export class InvoiceDetailComponent implements OnInit {
       name: 'Edit',
       class: 'edit',
       background: '#252945',
-      action: () => {},
+      action: (invoice: any) => {
+        this.invoiceService.setEditingInvoice(invoice);
+        this.sidebarService.toggle();
+      },
     },
     {
       name: 'Delete',
       class: 'delete',
       background: '#ec5757',
-      action: (ele: any) => {
-        this.dashboardService.removeInvoice(ele.id);
+      action: (invoice: any) => {
+        this.dashboardService.removeInvoice(invoice.id);
         this.router.navigate(['/']);
       },
     },
@@ -37,12 +50,6 @@ export class InvoiceDetailComponent implements OnInit {
       },
     },
   ];
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private dashboardService: DashboardService
-  ) {}
 
   ngOnInit(): void {
     this.dashboardService.invoices$.subscribe((invoices) => {

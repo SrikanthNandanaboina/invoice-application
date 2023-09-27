@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Item } from './item.model';
 
 @Component({
@@ -9,8 +9,15 @@ import { Item } from './item.model';
 export class ItemListComponent {
   itemList: Item[] = [];
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   getData(): any[] {
     return this.itemList;
+  }
+
+  setData(arr: Item[]) {
+    this.itemList = arr;
+    this.cdr.detectChanges();
   }
 
   addItem() {

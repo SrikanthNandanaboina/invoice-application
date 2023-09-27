@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     // Initialize invoices with sample data
     this.dashboardService.invoices$.subscribe((invoices) => {
+      console.log(invoices);
       this.invoices = invoices;
     });
   }
