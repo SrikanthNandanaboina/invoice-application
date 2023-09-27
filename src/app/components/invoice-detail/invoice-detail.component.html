@@ -24,7 +24,8 @@
       <h3
         *ngFor="let item of actions"
         [style.background-color]="item.background"
-        (click)="(item.action)"
+        (click)="item.action(invoice)"
+        [class]="item.class"
       >
         {{ item.name }}
       </h3>

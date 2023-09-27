@@ -49,6 +49,7 @@ h3 {
 }
 
 .discard {
+  cursor: pointer;
   background: #fff;
   color: #252945;
 }
@@ -154,4 +155,12 @@ input[type="date"]::-webkit-datetime-edit {
 
 #dropdown {
   color: #fff; /* Replace 'red' with your desired text color */
+}
+
+.save-draft {
+  cursor: pointer;
+}
+
+input {
+  color: #fff;
 }

@@ -17,5 +17,5 @@
       </div>
     </div>
   </div>
-  <app-new-invoice></app-new-invoice>
+  <app-new-invoice *ngIf="isInvoiceOpen | async"></app-new-invoice>
 </div>

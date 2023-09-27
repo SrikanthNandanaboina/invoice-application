@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Invoice } from 'src/app/models/invoice.model';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -7,36 +9,53 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./invoice-detail.component.css'],
 })
 export class InvoiceDetailComponent implements OnInit {
+  invoices: any[] = []; // Replace 'any[]' with the actual invoice data type
   invoice: any = {}; // Initialize with an empty object
   actions = [
     {
       name: 'Edit',
+      class: 'edit',
       background: '#252945',
       action: () => {},
     },
     {
       name: 'Delete',
+      class: 'delete',
       background: '#ec5757',
-      action: () => {},
+      action: (ele: any) => {
+        this.dashboardService.removeInvoice(ele.id);
+        this.router.navigate(['/']);
+      },
     },
     {
       name: 'Mark as Paid',
+      class: 'markPaid',
       background: '#7c5dfa',
-      action: () => {},
+      action: (invoice: Invoice) => {
+        invoice.status = 'paid';
+        this.dashboardService.updateInvoice(invoice);
+      },
     },
   ];
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private dashboardService: DashboardService
+  ) {}
 
   ngOnInit(): void {
-    // Retrieve the invoice ID from the route parameters
-    this.route.params.subscribe((params) => {
-      const invoiceId = params['id'];
+    this.dashboardService.invoices$.subscribe((invoices) => {
+      this.invoices = invoices;
 
-      // Fetch the invoice data based on the ID (you can use a service)
-      this.invoice = this.getInvoiceById(invoiceId); // Replace with your actual data fetching logic
+      this.route.params.subscribe((params) => {
+        const invoiceId = params['id'];
 
-      if (['paid', 'draft'].includes(this.invoice.status)) this.actions.pop();
+        // Fetch the invoice data based on the ID (you can use a service)
+        this.invoice = this.getInvoiceById(invoiceId); // Replace with your actual data fetching logic
+
+        if (['paid'].includes(this.invoice.status)) this.actions.pop();
+      });
     });
   }
 
@@ -54,242 +73,15 @@ export class InvoiceDetailComponent implements OnInit {
     // Mark the invoice as paid (implement this logic)
   }
 
-  private getInvoiceById(invoiceId: string): any {
-    // Simulate fetching the invoice by ID from your sample data
-    const sampleData = [
-      {
-        id: 'RT3080',
-        createdAt: '2021-08-18',
-        paymentDue: '2021-08-19',
-        description: 'Re-branding',
-        paymentTerms: 1,
-        clientName: 'Jensen Huang',
-        clientEmail: 'jensenh@mail.com',
-        status: 'paid',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '106 Kendell Street',
-          city: 'Sharrington',
-          postCode: 'NR24 5WQ',
-          country: 'United Kingdom',
-        },
-        items: [
-          {
-            name: 'Brand Guidelines',
-            quantity: 1,
-            price: 1800.9,
-            total: 1800.9,
-          },
-        ],
-        total: 1800.9,
-      },
-      {
-        id: 'XM9141',
-        createdAt: '2021-08-21',
-        paymentDue: '2021-09-20',
-        description: 'Graphic Design',
-        paymentTerms: 30,
-        clientName: 'Alex Grim',
-        clientEmail: 'alexgrim@mail.com',
-        status: 'pending',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '84 Church Way',
-          city: 'Bradford',
-          postCode: 'BD1 9PB',
-          country: 'United Kingdom',
-        },
-        items: [
-          {
-            name: 'Banner Design',
-            quantity: 1,
-            price: 156.0,
-            total: 156.0,
-          },
-          {
-            name: 'Email Design',
-            quantity: 2,
-            price: 200.0,
-            total: 400.0,
-          },
-        ],
-        total: 556.0,
-      },
-      {
-        id: 'RG0314',
-        createdAt: '2021-09-24',
-        paymentDue: '2021-10-01',
-        description: 'Website Redesign',
-        paymentTerms: 7,
-        clientName: 'John Morrison',
-        clientEmail: 'jm@myco.com',
-        status: 'paid',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '79 Dover Road',
-          city: 'Westhall',
-          postCode: 'IP19 3PF',
-          country: 'United Kingdom',
-        },
-        items: [
-          {
-            name: 'Website Redesign',
-            quantity: 1,
-            price: 14002.33,
-            total: 14002.33,
-          },
-        ],
-        total: 14002.33,
-      },
-      {
-        id: 'RT2080',
-        createdAt: '2021-10-11',
-        paymentDue: '2021-10-12',
-        description: 'Logo Concept',
-        paymentTerms: 1,
-        clientName: 'Alysa Werner',
-        clientEmail: 'alysa@email.co.uk',
-        status: 'pending',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '63 Warwick Road',
-          city: 'Carlisle',
-          postCode: 'CA20 2TG',
-          country: 'United Kingdom',
-        },
-        items: [
-          {
-            name: 'Logo Sketches',
-            quantity: 1,
-            price: 102.04,
-            total: 102.04,
-          },
-        ],
-        total: 102.04,
-      },
-      {
-        id: 'AA1449',
-        createdAt: '2021-10-7',
-        paymentDue: '2021-10-14',
-        description: 'Re-branding',
-        paymentTerms: 7,
-        clientName: 'Mellisa Clarke',
-        clientEmail: 'mellisa.clarke@example.com',
-        status: 'pending',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '46 Abbey Row',
-          city: 'Cambridge',
-          postCode: 'CB5 6EG',
-          country: 'United Kingdom',
-        },
-        items: [
-          {
-            name: 'New Logo',
-            quantity: 1,
-            price: 1532.33,
-            total: 1532.33,
-          },
-          {
-            name: 'Brand Guidelines',
-            quantity: 1,
-            price: 2500.0,
-            total: 2500.0,
-          },
-        ],
-        total: 4032.33,
-      },
-      {
-        id: 'TY9141',
-        createdAt: '2021-10-01',
-        paymentDue: '2021-10-31',
-        description: 'Landing Page Design',
-        paymentTerms: 30,
-        clientName: 'Thomas Wayne',
-        clientEmail: 'thomas@dc.com',
-        status: 'pending',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '3964  Queens Lane',
-          city: 'Gotham',
-          postCode: '60457',
-          country: 'United States of America',
-        },
-        items: [
-          {
-            name: 'Web Design',
-            quantity: 1,
-            price: 6155.91,
-            total: 6155.91,
-          },
-        ],
-        total: 6155.91,
-      },
-      {
-        id: 'FV2353',
-        createdAt: '2021-11-05',
-        paymentDue: '2021-11-12',
-        description: 'Logo Re-design',
-        paymentTerms: 7,
-        clientName: 'Anita Wainwright',
-        clientEmail: '',
-        status: 'draft',
-        senderAddress: {
-          street: '19 Union Terrace',
-          city: 'London',
-          postCode: 'E1 3EZ',
-          country: 'United Kingdom',
-        },
-        clientAddress: {
-          street: '',
-          city: '',
-          postCode: '',
-          country: '',
-        },
-        items: [
-          {
-            name: 'Logo Re-design',
-            quantity: 1,
-            price: 3102.04,
-            total: 3102.04,
-          },
-        ],
-        total: 3102.04,
-      },
-    ];
+  get invoicesData() {
+    return this.dashboardService.invoices$;
+  }
 
+  private getInvoiceById(invoiceId: string): any {
     // Find the invoice with the matching ID
-    const foundInvoice = sampleData.find((invoice) => invoice.id === invoiceId);
+    const foundInvoice = this.invoices.find(
+      (invoice) => invoice.id === invoiceId
+    );
 
     // You may want to handle cases where the invoice is not found
     if (!foundInvoice) {

@@ -9,6 +9,10 @@ import { Item } from './item.model';
 export class ItemListComponent {
   itemList: Item[] = [];
 
+  getData(): any[] {
+    return this.itemList;
+  }
+
   addItem() {
     const newItem = new Item();
     this.itemList.push(newItem);

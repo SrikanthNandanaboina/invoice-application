@@ -70,7 +70,7 @@
           <input
             type="text"
             id="streetAddress"
-            [(ngModel)]="billFrom.streetAddress"
+            [(ngModel)]="billTo.streetAddress"
           />
         </div>
 
@@ -80,19 +80,19 @@
             <div>
               <app-typography variant="body2" text="City" />
             </div>
-            <input type="text" id="city" [(ngModel)]="billFrom.city" />
+            <input type="text" id="city" [(ngModel)]="billTo.city" />
           </div>
           <div class="form-input">
             <div>
               <app-typography variant="body2" text="Post Code" />
             </div>
-            <input type="text" id="postCode" [(ngModel)]="billFrom.postCode" />
+            <input type="text" id="postCode" [(ngModel)]="billTo.postCode" />
           </div>
           <div class="form-input">
             <div>
               <app-typography variant="body2" text="Country" />
             </div>
-            <input type="text" id="country" [(ngModel)]="billFrom.country" />
+            <input type="text" id="country" [(ngModel)]="billTo.country" />
           </div>
         </div>
       </div>
@@ -124,11 +124,7 @@
           <app-typography variant="body2" text="Project Description" />
         </div>
         <!-- <label for="streetAddress"></label> -->
-        <input
-          type="text"
-          id="streetAddress"
-          [(ngModel)]="billFrom.streetAddress"
-        />
+        <input type="text" id="description" [(ngModel)]="description" />
       </div>
       <div>
         <app-item-list></app-item-list>
@@ -138,10 +134,10 @@
   <div class="footer">
     <!-- Fixed footer content goes here -->
     <div class="actions">
-      <h3 class="discard">Discard</h3>
+      <h3 class="discard" (click)="discard()">Discard</h3>
       <div class="save-action">
-        <h3 class="save-draft">Save as Draft</h3>
-        <h3 class="save">Save & Send</h3>
+        <h3 class="save-draft" (click)="save('draft')">Save as Draft</h3>
+        <h3 class="save" (click)="save('pending')">Save & Send</h3>
       </div>
     </div>
   </div>

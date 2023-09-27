@@ -170,3 +170,9 @@
 .go-back > img {
   margin-right: 8px;
 }
+
+.edit,
+.delete,
+.markPaid {
+  cursor: pointer;
+}
